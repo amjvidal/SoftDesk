@@ -6,9 +6,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SoftDesk</title>
 </head>
-<body>
-    <h1 class="text-5xl font-bold text-black underline">
-        Pagina de Registro Outros
-    </h1>
+<body class="flex flex-col min-h-screen overflow-hidden md:flex-row">
+    <!-- Metade esquerda com imagem -->
+    <div class="flex items-center justify-center w-full p-4 mt-[10%] ml-11 bg-white md:w-[60%] h-[60%] md:h-full">
+        <img src="{{ url_for('static', filename='cadastro2svg.svg') }}" alt="Imagem de fundo" class="object-contain w-4/5 h-4/5">
+    </div>
+
+    <!-- Metade direita com formulário -->
+    <div class="flex items-center justify-center w-16 p-1 overflow-auto ml-[-5%] md:w-1/2 h-16 md:h-full flex-col">
+        <form class="flex-shrink w-full max-w-md p-4 space-y-4 text-sm bg-white md:p-6">
+            <h2 class="mb-5 text-2xl font-bold text-gray-800 md:text-3xl">Cadastro</h2>
+
+            <!-- Upload de Foto (Botão redondo com preview menor) -->
+            <div class="flex flex-col items-center space-y-2">
+            <!-- Botão circular menor -->
+            <label for="foto-upload" class="relative flex items-center justify-center w-20 h-20 overflow-hidden bg-gray-200 rounded-full cursor-pointer group">
+                <!-- Ícone "+" -->
+                <span id="plus-icon" class="z-10 text-3xl text-gray-500 group-hover:text-gray-700">+</span>
+
+                <!-- Imagem preview -->
+                <img id="foto-preview" src="#" alt="Preview" class="absolute inset-0 z-0 hidden object-cover w-full h-full">
+            </label>
+
+            <!-- Texto abaixo -->
+            <p class="text-sm text-gray-600">Sua foto aqui</p>
+
+            <!-- Input escondido -->
+            <input id="foto-upload" name="foto" type="file" accept="image/*" class="hidden" onchange="mostrarFoto(event)">
+            </div>
+
+            <!-- Seis campos -->
+            <div class="">
+                <div>
+                    <label class="block font-semibold text-gray-700">Nome Completo *</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700">Email (discente) *</label>
+                    <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                <label for="cpf" class="block font-semibold text-gray-700">CPF *</label>
+                <input 
+                    id="cpf"
+                    type="text"
+                    placeholder="000.000.000-00"
+                    maxlength="14"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    oninput="formatarCPF(this)"
+                >
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700">Ocupação *</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700">LinkedIn</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700">Fale sobre você</label>
+                    <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg resize-none" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="flex flex-col justify-between gap-4 sm:flex-row">
+                <button type="reset" class="w-full sm:w-1/2 py-2 text-[#1351B4] font-bold border-2 border-[#1351B4] rounded-full hover:bg-[#1351B4] hover:text-white">
+                    Cancelar
+                </button>
+                <button type="submit" class="w-full sm:w-1/2 py-2 bg-[#1351B4] text-white font-bold rounded-full hover:bg-white hover:text-[#1351B4] hover:border-2 hover:border-[#1351B4]">
+                    Registrar
+                </button>
+            </div>
+
+            <!-- Rodapé do formulário -->
+            <div class="flex items-center justify-between gap-2 pt-2">
+                <img src="{{ url_for('static', filename='ifpelogo.png') }}" alt="Logo IFPE" class="h-11">
+                <span class="text-xs text-gray-600">Precisa de Ajuda?</span>
+            </div>
+        </form>
+    </div>
 </body>
+
+<script>
+  function mostrarFoto(event) {
+    const input = event.target;
+    const preview = document.getElementById('foto-preview');
+    const plusIcon = document.getElementById('plus-icon');
+
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.classList.remove('hidden');
+        plusIcon.classList.add('hidden');
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  function formatarCPF(campo) {
+    // Remove tudo que não for número
+    let valor = campo.value.replace(/\D/g, '');
+
+    // Limita a 11 dígitos numéricos
+    valor = valor.substring(0, 11);
+
+    // Aplica a máscara do CPF
+    if (valor.length > 9) {
+      campo.value = valor.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    } else if (valor.length > 6) {
+      campo.value = valor.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+    } else if (valor.length > 3) {
+      campo.value = valor.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+    } else {
+      campo.value = valor;
+    }
+  }
+</script>
 </html>
