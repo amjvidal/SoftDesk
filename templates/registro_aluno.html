@@ -14,79 +14,35 @@
 
     <!-- Metade direita com formulário -->
     <div class="flex items-center justify-center w-16 p-1 overflow-auto ml-[-5%] md:w-1/2 h-16 md:h-full flex-col">
-        <form class="flex-shrink w-full max-w-md p-4 space-y-4 text-sm bg-white md:p-6">
+        <form action="{{ url_for('registroAluno.registroAluno') }}" method="POST" class="flex-shrink w-full max-w-md p-4 space-y-4 text-sm bg-white md:p-6">
             <h2 class="mb-5 text-2xl font-bold text-gray-800 md:text-3xl">Cadastro</h2>
 
-            <!-- Upload de Foto (Botão redondo com preview menor) -->
-            <div class="flex flex-col items-center space-y-2">
-            <!-- Botão circular menor -->
-            <label for="foto-upload" class="relative flex items-center justify-center w-20 h-20 overflow-hidden bg-gray-200 rounded-full cursor-pointer group">
-                <!-- Ícone "+" -->
-                <span id="plus-icon" class="z-10 text-3xl text-gray-500 group-hover:text-gray-700">+</span>
+            <div class="space-y-3">
+                {% for input in inputs %}
+                    <div>
+                        <label for="{{ input.id }}" class="block font-semibold text-gray-700">{{ input.placeholder }}</label>
 
-                <!-- Imagem preview -->
-                <img id="foto-preview" src="#" alt="Preview" class="absolute inset-0 z-0 hidden object-cover w-full h-full">
-            </label>
-
-            <!-- Texto abaixo -->
-            <p class="text-sm text-gray-600">Sua foto aqui</p>
-
-            <!-- Input escondido -->
-            <input id="foto-upload" name="foto" type="file" accept="image/*" class="hidden" onchange="mostrarFoto(event)">
-            </div>
-
-            <!-- Seis campos -->
-            <div class="">
-                <div>
-                    <label class="block font-semibold text-gray-700">Nome Completo *</label>
-                    <input 
-                        id="nome_completo"
-                        type="text" 
-                        placeholder="Nome Completo"
-                        maxlength="100"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg">
-                </div>
-                <div>
-                    <label class="block font-semibold text-gray-700">Email (discente) *</label>
-                    <input 
-                        id="email"
-                        type="email" 
-                        placeholder="E-Mail"
-                        maxlength="50"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg">
-                </div>
-                <div>
-                    <label class="block font-semibold text-gray-700">Matrícula *</label>
-                    <input 
-                        id="matricula"
-                        type="text" 
-                        placeholder="Matrícula"
-                        maxlength="20"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg">
-                </div>                
-                <div>
-                <label for="cpf" class="block font-semibold text-gray-700">CPF *</label>
-                <input 
-                    id="cpf"
-                    type="text"
-                    placeholder="000.000.000-00"
-                    maxlength="14"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                    oninput="formatarCPF(this)"
-                >
-                </div>
-                <div>
-                    <label class="block font-semibold text-gray-700">LinkedIn</label>
-                    <input 
-                        id="linkedin"
-                        type="text" 
-                        placeholder="LinkedIn"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg">
-                </div>
-                <div>
-                    <label class="block font-semibold text-gray-700">Fale sobre você</label>
-                    <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg resize-none" rows="3"></textarea>
-                </div>
+                        {% if input.type == 'textarea' %}
+                            <textarea
+                                id="{{ input.id }}"
+                                name="{{ input.name }}"
+                                placeholder="{{ input.placeholder }}"
+                                rows="3"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg resize-none"
+                            ></textarea>
+                        {% else %}
+                            <input
+                                id="{{ input.id }}"
+                                name="{{ input.name }}"
+                                type="{{ input.type }}"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                {% if input.placeholder and input.id == 'cpf' %}placeholder="{{ input.placeholder }}"{% endif %}
+                                {% if input.maxlength %}maxlength="{{ input.maxlength }}"{% endif %}
+                                {% if input.id == 'cpf' %}oninput="formatarCPF(this)"{% endif %}
+                            >
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
 
             <!-- Botões -->
@@ -99,7 +55,7 @@
                 </button>
             </div>
 
-            <!-- Rodapé do formulário -->
+            <!-- Rodapé -->
             <div class="flex items-center justify-between gap-2 pt-2">
                 <img src="{{ url_for('static', filename='ifpelogo.png') }}" alt="Logo IFPE" class="h-11">
                 <span class="text-xs text-gray-600">Precisa de Ajuda?</span>
