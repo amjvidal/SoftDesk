@@ -6,9 +6,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SoftDesk</title>
 </head>
-<body>
-    <h1 class="text-5xl font-bold text-black underline">
-        Pagina de registro Aluno
-    </h1>
+<body class="flex flex-col min-h-screen overflow-hidden md:flex-row">
+    <!-- Metade esquerda com imagem -->
+    <div class="flex items-center justify-center w-full p-4 mt-[10%] ml-11 bg-white md:w-[60%] h-[60%] md:h-full">
+        <img src="{{ url_for('static', filename='cadastro2svg.svg') }}" alt="Imagem de fundo" class="object-contain w-4/5 h-4/5">
+    </div>
+
+    <!-- Metade direita com formulário -->
+    <div class="flex items-center justify-center w-16 p-1 overflow-auto ml-[-5%] md:w-1/2 h-16 md:h-full flex-col">
+        <form action="{{ url_for('registroAluno.registroAluno') }}" method="POST" class="flex-shrink w-full max-w-md p-4 space-y-4 text-sm bg-white md:p-6">
+            <h2 class="mb-5 text-2xl font-bold text-gray-800 md:text-3xl">Cadastro</h2>
+
+            <div class="space-y-3">
+                {% for input in inputs %}
+                    <div>
+                        <label for="{{ input.id }}" class="block font-semibold text-gray-700">{{ input.placeholder }}</label>
+
+                        {% if input.type == 'textarea' %}
+                            <textarea
+                                id="{{ input.id }}"
+                                name="{{ input.name }}"
+                                placeholder="{{ input.placeholder }}"
+                                rows="3"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg resize-none"
+                            ></textarea>
+                        {% else %}
+                            <input
+                                id="{{ input.id }}"
+                                name="{{ input.name }}"
+                                type="{{ input.type }}"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                {% if input.placeholder and input.id == 'cpf' %}placeholder="{{ input.placeholder }}"{% endif %}
+                                {% if input.maxlength %}maxlength="{{ input.maxlength }}"{% endif %}
+                                {% if input.id == 'cpf' %}oninput="formatarCPF(this)"{% endif %}
+                            >
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Botões -->
+            <div class="flex flex-col justify-between gap-4 sm:flex-row">
+                <button type="reset" class="w-full sm:w-1/2 py-2 text-[#1351B4] font-bold border-2 border-[#1351B4] rounded-full hover:bg-[#1351B4] hover:text-white">
+                    Cancelar
+                </button>
+                <button type="submit" class="w-full sm:w-1/2 py-2 bg-[#1351B4] text-white font-bold rounded-full hover:bg-white hover:text-[#1351B4] hover:border-2 hover:border-[#1351B4]">
+                    Registrar
+                </button>
+            </div>
+
+            <!-- Rodapé -->
+            <div class="flex items-center justify-between gap-2 pt-2">
+                <img src="{{ url_for('static', filename='ifpelogo.png') }}" alt="Logo IFPE" class="h-11">
+                <span class="text-xs text-gray-600">Precisa de Ajuda?</span>
+            </div>
+        </form>
+    </div>
 </body>
+
+<script>
+  function mostrarFoto(event) {
+    const input = event.target;
+    const preview = document.getElementById('foto-preview');
+    const plusIcon = document.getElementById('plus-icon');
+
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.classList.remove('hidden');
+        plusIcon.classList.add('hidden');
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  function formatarCPF(campo) {
+    // Remove tudo que não for número
+    let valor = campo.value.replace(/\D/g, '');
+
+    // Limita a 11 dígitos numéricos
+    valor = valor.substring(0, 11);
+
+    // Aplica a máscara do CPF
+    if (valor.length > 9) {
+      campo.value = valor.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    } else if (valor.length > 6) {
+      campo.value = valor.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+    } else if (valor.length > 3) {
+      campo.value = valor.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+    } else {
+      campo.value = valor;
+    }
+  }
+</script>
 </html>
