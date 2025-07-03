@@ -1325,3 +1325,38 @@ video {
     line-height: 2.25rem;
   }
 }
+#nome_completo{
+  padding: 10px 10px 10px 40px;
+  background-image: url(/static/icon.png);
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-size: 20px;
+}
+#email{
+  padding: 10px 10px 10px 40px;
+  background-image: url(/static/email.png);
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-size: 20px;
+}
+#matricula{
+  padding: 10px 10px 10px 40px;
+  background-image: url(/static/matricula.png);
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-size: 20px;
+}
+#cpf{
+  padding: 10px 10px 10px 40px;
+  background-image: url(/static/cpf.png);
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-size: 20px;
+}
+#linkedin{
+  padding: 10px 10px 10px 40px;
+  background-image: url(/static/linkedin.png);
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-size: 20px;
+}
