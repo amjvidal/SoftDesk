@@ -4,18 +4,19 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/css/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar Senha - SoftDesk</title> </head>
-<body class="flex flex-col min-h-screen overflow-hidden md:flex-row bg-white">
+    <title>Recuperar Senha - SoftDesk</title>
+</head>
+<body class="flex flex-col min-h-screen overflow-hidden bg-white md:flex-row">
 
     <div class="flex items-center justify-center w-full md:w-[60%] p-4 md:p-8">
         <img src="{{ url_for('static', filename='esqueceu-senha-ilustracao.png') }}"
              alt="Ilustração de recuperação de senha"
-             class="object-contain w-4/5 h-4/5 max-w-full">
+             class="object-contain w-4/5 max-w-full h-4/5">
     </div>
 
     <div class="flex items-center justify-start w-full md:w-[40%] pl-8 pr-8 sm:px-12 md:px-12 lg:px-16 py-12">
-        <form action="/recuperar_codigo" method="GET" class="w-full max-w-md space-y-7">
-            <a href="/login" class="
+        <form action="{{ url_for('recuperar.recuperar') }}" method="POST" class="w-full max-w-md space-y-7">
+            <a href="/" class="
                 block text-right text-base font-semibold
                 py-2 px-5 rounded-full
                 text-[#1351B4]
@@ -27,32 +28,46 @@
                 Voltar para Login
             </a>
 
-            <h2 class="text-4xl font-bold text-gray-800 mb-3">Esqueceu a senha</h2>
-            <p class="text-lg text-gray-600 mb-8">Digite seu email cadastrado</p>
+            <h2 class="mb-3 text-4xl font-bold text-gray-800">Esqueceu a senha</h2>
+            <p class="mb-8 text-lg text-gray-600">Digite seu email cadastrado</p>
 
+            {% for input in inputs %}
             <div>
-                <label for="email" class="block font-semibold text-gray-700 text-base">Email</label>
+                <label for="{{ input.id }}" class="block text-base font-semibold text-gray-700">
+                    {{ input.placeholder }}
+                </label>
                 <div class="relative mt-1">
-                    <input type="email" id="email" name="email" placeholder="Email"
-                           class="w-full pl-11 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1351B4] text-base"
-                           required>
-                    <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <input
+                        type="{{ input.type }}"
+                        id="{{ input.id }}"
+                        name="{{ input.name }}"
+                        placeholder="{{ input.placeholder }}"
+                        class="w-full pl-11 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1351B4] text-base"
+                        required
+                    >
+                    <svg class="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                     </svg>
                 </div>
             </div>
+            {% endfor %}
 
             <div class="flex items-start p-4 text-base text-[#1351B4] bg-[#E6F0FF] rounded-lg">
-                <svg class="flex-shrink-0 inline w-6 h-6 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                <svg class="flex-shrink-0 inline w-6 h-6 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clip-rule="evenodd"></path>
                 </svg>
                 <div>
                     Email para receber um código de acesso
                 </div>
             </div>
 
-            <button type="submit" class="w-full py-4 bg-[#1351B4] text-white font-bold rounded-full hover:bg-white hover:text-[#1351B4] hover:border-2 hover:border-[#1351B4] transition duration-200 ease-in-out text-lg">
+            <button type="submit"
+                class="w-full py-4 bg-[#1351B4] text-white font-bold rounded-full hover:bg-white hover:text-[#1351B4] hover:border-2 hover:border-[#1351B4] transition duration-200 ease-in-out text-lg">
                 Continuar
             </button>
 
@@ -60,3 +75,8 @@
                 <img src="{{ url_for('static', filename='ifpelogo.png') }}" alt="Logo IFPE" class="h-12">
                 <a href="#" class="text-sm text-gray-600 hover:underline">Precisa de Ajuda?</a>
             </div>
+        </form>
+    </div>
+
+</body>
+</html>

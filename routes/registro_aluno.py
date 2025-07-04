@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from firebase import cadastroAluno
 
 registroAluno_routes = Blueprint('registroAluno',__name__)
 
@@ -19,9 +20,23 @@ def registroAluno():
     {'id': 'bio', 'type': 'textarea', 'placeholder': 'Fale sobre você', 'name': 'bio'},
 ]
     if request.method == 'POST':
-        dados = {campo['name']: request.form.get(campo['name']) for campo in inputs}
-        print("Dados recebidos no formulário:")
-        for chave, valor in dados.items():
-            print(f"{chave}: {valor}")
+        nome = request.form.get('nome')
+        email = request.form.get('email')
+        cpf = request.form.get('cpf')
+        matricula = request.form.get('matricula')
+        senha = request.form.get('senha')
+        confirma_senha = request.form.get('confirmaSenha')
+        bio = request.form.get('bio')
+
+        if senha != confirma_senha:
+            flash("As senhas não coincidem.", "error")
+            return render_template('registro_aluno.html', inputs=inputs)
+
+        try:
+            cadastroAluno(nome, email, senha, cpf, matricula, bio)
+            flash("Cadastro realizado com sucesso! Verifique seu e-mail.", "success")
+            return redirect(url_for('login.login'))  
+        except Exception as e:
+            flash(f"Erro ao cadastrar: {str(e)}", "error")
             
     return render_template('registro_aluno.html', inputs=inputs)
