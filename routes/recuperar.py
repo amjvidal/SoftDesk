@@ -17,9 +17,6 @@ def recuperar():
     if request.method == 'POST':
         dados = {campo['name']: request.form.get(campo['name']) for campo in inputs}
         email = dados.get('email')
-        print("Dados recebidos no formulário:")
-        for chave, valor in dados.items():
-            print(f"{chave}: {valor}")
         
         if email:
             try:
