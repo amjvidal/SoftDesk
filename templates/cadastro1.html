@@ -4,11 +4,39 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/css/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoftDesk</title>
+    <title>Sistema de Cadastro de Demandas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1 class="text-5xl font-bold text-black underline">
-        Página de Cadastro
-    </h1>
+<body class="bg-white font-sans">
+  <div class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="max-w-4xl w-full">
+      <h1 class="text-2xl font-bold mb-2 text-gray-800">
+        Bem Vindo ao Sistema de Cadastro de Demandas
+      </h1>
+      <div class="bg-blue-600 text-white text-sm px-2 py-2 rounded-md mb-4 flex items-center w-fit">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 3a1 1 0 10-2 0v2a1 1 0 002 0v-2zm-1-7a1 1 0 00-.993.883L9 7v3a1 1 0 001.993.117L11 10V7a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+        Escolha ao lado o módulo que deseja acessar. Seu login e senha serão necessários.
+      </div>
+
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-8 mt-8">
+        <img src="{{ url_for('static', filename='cadastrosvg.svg') }}" alt="Equipe trabalhando" class="max-w-sm w-full">
+
+        <div class="flex flex-col gap-4 w-full max-w-xs">
+          <button class="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 rounded-2xl transition">Aluno</button>
+          <button class="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 rounded-2xl transition">Outros</button>
+          <button class="border border-blue-700 hover:bg-neutral-200 font-semibold py-2 rounded-2xl hover:bg-blue-50 transition">Voltar</button>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center mt-16">
+        <div class="text-sm text-gray-600 flex items-center gap-2">
+          <img src="{{ url_for('static', filename='ifpelogo.png') }}" alt="IFPE" class="h-12" width="130">
+        </div>
+        <a href="#" class="text-blue-700 text-sm hover:underline">Precisa de Ajuda?</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
