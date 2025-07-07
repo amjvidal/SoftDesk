@@ -12,12 +12,18 @@ from routes.cadastro1 import cadastro_routes
 from routes.recuperar import recuperar_routes
 from routes.registro_aluno import registroAluno_routes
 from routes.registro_outro import registroOutro_routes
+from routes.perfil import perfil_bp
+from routes.perfil_editavel import perfil_ed
+
 
 app.register_blueprint(login_routes)
 app.register_blueprint(cadastro_routes)
 app.register_blueprint(recuperar_routes)
 app.register_blueprint(registroAluno_routes)
 app.register_blueprint(registroOutro_routes)
+app.register_blueprint(perfil_bp)
+app.register_blueprint(perfil_ed)
+
 
 
 app.run(debug=True)
