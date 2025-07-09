@@ -1,4 +1,7 @@
 import pyrebase
+from werkzeug.utils import secure_filename
+import os
+import tempfile
 
 """"
 firebaseConfig = {
@@ -99,6 +102,32 @@ def loginfb(email, password):
             'message': 'Email ou senha inválidos.',
             'user': None
         }
+        
+def atualizarAluno(user_id, dados):
+    try:
+        db.child("usuarios").child(user_id).update(dados)
+        print("Dados atualizados com sucesso.")
+    except Exception as e:
+        print("Erro ao atualizar dados:", e)
+        raise Exception("Erro ao atualizar os dados do usuário.")
+    
+
+
+UPLOAD_FOLDER = os.path.join('uploads', 'perfil_fotos')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+def salvarFotoPerfilLocal(user_id, foto_file):
+    if not foto_file:
+        raise Exception("Nenhum arquivo enviado.")
+
+    filename = secure_filename(f"{user_id}.jpg")
+    caminho_relativo = os.path.join('uploads', 'perfil_fotos', filename)
+    caminho_completo = os.path.join(os.getcwd(), caminho_relativo)
+
+    foto_file.save(caminho_completo)
+
+    return f"/{caminho_relativo.replace(os.sep, '/')}"  # URL para uso no HTML
+
   
 def recoverPassword(email):
   auth.send_password_reset_email(email)
