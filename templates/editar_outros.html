@@ -7,3 +7,88 @@
     <title>Sistema de Cadastro de Demandas</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-white min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="flex-col px-4 py-3 border-b">
+    <div class="flex items-center justify-between gap-2">
+      <img src="{{ url_for('static', filename='ifpelogo.png') }}" alt="IFPE" class="h-8">
+      <div class="flex items-center gap-4">
+      <button class="text-gray-600">
+        🔔
+      </button>
+      <a href="#" class="text-blue-700 font-semibold">Sair</a>
+    </div>
+    </div>
+    <a href="#">
+      <div class="inline-flex rounded-lg px-3 gap-3 hover:bg-gray-300">
+        <img src="{{ url_for('static', filename='botao_lateral.png') }}" alt="botao lateral">
+        <p class="font-Rawline">
+          Editar Perfil
+        </p>
+      </div>
+    </a>
+    
+  </header>
+  <div>
+
+  <!-- Breadcrumb -->
+  <nav class="text-sm text-gray-600 px-4 mt-2">
+    <a href="#" class="inline-flex items-center gap-1 text-blue-600 hover:underline">
+      <img src="{{ url_for('static', filename='home.png') }}" alt="home">
+    </a> 
+    &gt; Perfil
+  </nav>
+
+  <!-- Main content -->
+  <main class="flex-grow flex items-center justify-center p-4">
+    <form class="w-full max-w-xl space-y-4">
+      <!-- Foto -->
+      <div class="flex flex-col items-center">
+        <!-- <img src="{{ url_for('static', filename='ifpelogo.png') }}" alt="imagem"> -->
+
+        <div class="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-sm text-white mb-2">
+          Foto
+        </div>
+        <span class="text-sm text-gray-400">Sua foto aqui</span>
+      </div>
+
+      <!-- Campos de entrada -->
+      <div class="space-y-3">
+        <div class="flex items-center border rounded px-3">
+          <img src="{{ url_for('static', filename='icon.png') }}" alt="icon" class="mr-2">
+          <input type="text" placeholder="Nome" class="w-full outline-none" />
+        </div>
+        <div class="flex items-center border rounded px-3">
+          <img src="{{ url_for('static', filename='email.png') }}" alt="email" class="mr-2">
+          <input type="email" placeholder="Email" class="w-full outline-none" />
+        </div>
+        <div class="flex items-center border rounded px-3">
+          <img src="{{ url_for('static', filename='senha.png') }}" alt="senha" class="mr-2">
+          <input type="password" placeholder="Senha" class="w-full outline-none" />
+        </div>
+        <div class="flex items-center border rounded px-3">
+          <img src="{{ url_for('static', filename='maleta_trabalho.png') }}" alt="matricula" class="mr-2">
+          <input type="text" placeholder="Ocupação" class="w-full outline-none" />
+        </div>
+        <div class="flex items-center border rounded px-3">
+          <img src="{{ url_for('static', filename='linkedin.png') }}" alt="linkedin" class="mr-2">
+          <input type="text" placeholder="LinkedIn" class="w-full outline-none" />
+        </div>
+        <div class="border rounded px-3 py-2">
+          <textarea placeholder="Fale um pouco sobre você" class="w-full h-32 resize-none outline-none"></textarea>
+        </div>
+      </div>
+
+      <!-- Botões -->
+      <div class="flex justify-end gap-4 pt-4">
+        <button type="button" class="border border-red-500 text-red-500 hover:bg-red-50 font-semibold px-4 py-2 rounded-full">
+          Cancelar
+        </button>
+        <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-4 py-2 rounded-full">
+          Salvar
+        </button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
