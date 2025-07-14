@@ -12,6 +12,8 @@ from routes.cadastro1 import cadastro_routes
 from routes.recuperar import recuperar_routes
 from routes.registro_aluno import registroAluno_routes
 from routes.registro_outro import registroOutro_routes
+from routes.editar_aluno import editarAluno_routes
+from routes.editar_outros import editarOutros_routes
 from routes.home import home_routes
 from routes.home_demandas import home_demandas_routes
 from routes.home_nova_demanda import home_nova_demanda_routes
@@ -24,6 +26,8 @@ app.register_blueprint(cadastro_routes)
 app.register_blueprint(recuperar_routes)
 app.register_blueprint(registroAluno_routes)
 app.register_blueprint(registroOutro_routes)
+app.register_blueprint(editarAluno_routes)
+app.register_blueprint(editarOutros_routes)
 app.register_blueprint(home_routes)
 app.register_blueprint(home_demandas_routes)
 app.register_blueprint(home_nova_demanda_routes)

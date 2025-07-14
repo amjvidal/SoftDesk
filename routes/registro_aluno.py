@@ -11,7 +11,7 @@ registroAluno_routes = Blueprint('registroAluno',__name__)
 def registroAluno():
     """ Retorna a página de registro de Alunos """
     inputs = [
-    {'id': 'nome_completo', 'type': 'text', 'placeholder': 'Nome Completo *', 'name': 'nome_completo'},
+    {'id': 'nome', 'type': 'text', 'placeholder': 'Nome Completo *', 'name': 'nome'},
     {'id': 'email', 'type': 'email', 'placeholder': 'Email (discente) *', 'name': 'email'},
     {'id': 'matricula', 'type': 'text', 'placeholder': 'Matrícula *', 'name': 'matricula'},
     {'id': 'cpf', 'type': 'text', 'placeholder': '000.000.000-00', 'name': 'cpf'},
