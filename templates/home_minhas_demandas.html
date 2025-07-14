@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Demandas - Sistema de Cadastro de Demandas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+
+    <div class="flex min-h-screen">
+        <aside class="flex flex-col w-64 bg-white shadow-lg">
+            <div class="flex items-center justify-center h-20 border-b">
+                <div class="flex items-center">
+                    <div class="flex items-center">
+                        <img src={{ url_for('static', filename='ifpelogo.png') }} alt="Logo IFPE" class="h-12">
+                    </div>
+                </div>
+            </div>
+
+            <nav class="flex-1 px-4 py-4 space-y-2">
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
+                    <i class="fas fa-home w-6 text-center"></i>
+                    <span class="ml-3">Página Inicial</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-blue-700 bg-gray-200 rounded-md font-semibold">
+                    <i class="fas fa-tasks w-6 text-center"></i>
+                    <span class="ml-3">Minhas Demandas</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
+                    <i class="fas fa-plus-circle w-6 text-center"></i>
+                    <span class="ml-3">Nova Demanda</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
+                    <i class="fas fa-chart-bar w-6 text-center"></i>
+                    <span class="ml-3">Relatórios</span>
+                </a>
+            </nav>
+        </aside>
+
+        <div class="flex-1 flex flex-col">
+            <header class="flex items-center justify-between h-20 px-8 bg-white border-b">
+                <div>
+                    <h2 class="text-3xl font-semibold text-gray-800">Sistema de Cadastro de Demandas</h2>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="relative">
+                        <button class="text-blue-600 hover:text-blue-800 focus:outline-none">
+                            <i class="fas fa-bell fa-lg"></i>
+                        </button>
+                        <span class="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">2</span>
+                    </div>
+                    <button class="font-semibold text-blue-600 hover:text-blue-700">Sair</button>
+                </div>
+            </header>
+
+            <main class="flex-1 p-8">
+                <h1 class="text-4xl text-gray-800 mb-8 font-semibold">Minhas Demandas</h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+                    {% for i in range(4) %}
+                    <div class="bg-white rounded-lg shadow-md p-6 flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-2xl mr-4">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-lg text-gray-800">Título da demanda</p>
+                                        <p class="text-sm text-gray-500">Quem colocou</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-700"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+
+                            <div class="text-right text-sm text-gray-500 mb-4">
+                                Prazo estimado: <strong>25/06/25</strong>
+                            </div>
+
+                            <div class="space-y-3 text-sm">
+                                <div>
+                                    <h4 class="font-semibold text-gray-700">Descrição</h4>
+                                    <p class="text-gray-600">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-700">Categoria</h4>
+                                    <p class="text-gray-600">Lorem ipsum dolor sit amet</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-700">Dificuldade</h4>
+                                    <p class="text-gray-600">Lorem ipsum dolor sit amet</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-700">Número de alunos necessários</h4>
+                                    <p class="text-gray-600">Lorem ipsum dolor sit amet</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-700">Tecnologias sugeridas</h4>
+                                    <p class="text-gray-600">Lorem ipsum dolor sit amet</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-gray-200 text-right">
+                            <a href="#" class="text-blue-600 font-bold hover:underline">Acompanhar</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>
