@@ -20,26 +20,26 @@
             </div>
 
             <nav class="flex-1 px-4 py-4 space-y-2">
-                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
-                    <i class="fas fa-home w-6 text-center"></i>
+                <a href="/home" class="flex items-center px-4 py-2 font-semibold text-gray-600 rounded-md hover:bg-gray-200">
+                    <i class="w-6 text-center fas fa-home"></i>
                     <span class="ml-3">Página Inicial</span>
                 </a>
-                <a href="#" class="flex items-center px-4 py-2 text-blue-700 bg-gray-200 rounded-md font-semibold">
-                    <i class="fas fa-tasks w-6 text-center"></i>
+                <a href="#" class="flex items-center px-4 py-2 font-semibold text-blue-700 bg-gray-200 rounded-md">
+                    <i class="w-6 text-center fas fa-tasks"></i>
                     <span class="ml-3">Minhas Demandas</span>
                 </a>
-                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
-                    <i class="fas fa-plus-circle w-6 text-center"></i>
+                <a href="/homeNovaDemanda" class="flex items-center px-4 py-2 font-semibold text-gray-600 rounded-md hover:bg-gray-200">
+                    <i class="w-6 text-center fas fa-plus-circle"></i>
                     <span class="ml-3">Nova Demanda</span>
                 </a>
-                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
-                    <i class="fas fa-chart-bar w-6 text-center"></i>
+                <a href="#" class="flex items-center px-4 py-2 font-semibold text-gray-600 rounded-md hover:bg-gray-200">
+                    <i class="w-6 text-center fas fa-chart-bar"></i>
                     <span class="ml-3">Relatórios</span>
                 </a>
             </nav>
         </aside>
 
-        <div class="flex-1 flex flex-col">
+        <div class="flex flex-col flex-1">
             <header class="flex items-center justify-between h-20 px-8 bg-white border-b">
                 <div>
                     <h2 class="text-3xl font-semibold text-gray-800">Sistema de Cadastro de Demandas</h2>
@@ -49,7 +49,7 @@
                         <button class="text-blue-600 hover:text-blue-800 focus:outline-none">
                             <i class="fas fa-bell fa-lg"></i>
                         </button>
-                        <span class="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">2</span>
+                        <span class="absolute flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2">2</span>
                     </div>
                     <button class="font-semibold text-blue-600 hover:text-blue-700">Sair</button>
                 </div>
@@ -57,18 +57,22 @@
 
             <main class="relative flex-1 p-8">
 
-                <h1 class="text-4xl font-light text-gray-800 mb-8 font-semibold">Demanda</h1>
+                <h1 class="mb-8 text-4xl font-light font-semibold text-gray-800">Demanda</h1>
                 
-                <div class="bg-white p-8 rounded-lg shadow-md">
-                     <h2 class="text-2xl font-semibold text-gray-800 mb-4">Nome Demanda</h2>
-                     <p class="text-gray-600 leading-relaxed">
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.
-                     </p>
+                <div class="p-8 bg-white rounded-lg shadow-md">
+                    <h2 class="mb-4 text-2xl font-semibold text-gray-800">{{ demanda.titulo }}</h2>
+                    <p class="mb-6 leading-relaxed text-gray-600">{{ demanda.descricao }}</p>
+
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li><strong>Categoria:</strong> {{ demanda.categoria }}</li>
+                        <li><strong>Data de Criação:</strong> {{ demanda.data_criacao }}</li>
+                        <li><strong>Usuário:</strong> {{ demanda.usuario_nome or "Não informado" }}</li>
+                    </ul>
                 </div>
 
                 <div class="absolute bottom-8 left-8">
-                    <button class="flex items-center bg-blue-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        <i class="fas fa-paper-plane mr-3"></i>
+                    <button class="flex items-center px-6 py-3 font-semibold text-white transition-colors duration-300 bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <i class="mr-3 fas fa-paper-plane"></i>
                         Candidatar-se
                     </button>
                 </div>

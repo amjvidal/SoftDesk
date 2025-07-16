@@ -1,5 +1,6 @@
 import pyrebase
 from werkzeug.utils import secure_filename
+from datetime import datetime
 import os
 import tempfile
 
@@ -128,6 +129,78 @@ def salvarFotoPerfilLocal(user_id, foto_file):
 
     return f"/{caminho_relativo.replace(os.sep, '/')}"  # URL para uso no HTML
 
+def criar_demanda(user_id, titulo, categoria, descricao):
+    try:
+        # Buscar o nome do usuário no banco de dados
+        usuario_info = db.child("usuarios").child(user_id).get().val()
+        nome_usuario = usuario_info.get("nome", "Usuário não encontrado")
+
+        # Monta a demanda com o nome do usuário
+        demanda = {
+            "titulo": titulo,
+            "categoria": categoria,
+            "descricao": descricao,
+            "usuario_id": user_id,
+            "usuario_nome": nome_usuario,
+            "data_criacao": datetime.now().isoformat()
+        }
+
+        db.child("demandas").push(demanda)
+        print("Demanda criada com sucesso!")
+    except Exception as e:
+        print("Erro ao criar demanda:", e)
+        raise Exception("Erro ao registrar a demanda.")
+    
+def get_todas_demandas():
+    try:
+        demandas_raw = db.child("demandas").get()
+        demandas = []
+
+        if demandas_raw.each():
+            for item in demandas_raw.each():
+                dados = item.val()
+                dados['id'] = item.key()
+
+                # Formata data
+                data = datetime.fromisoformat(dados.get('data_criacao', datetime.now().isoformat()))
+                dados['data_formatada'] = data.strftime('%d/%m/%y')
+
+                # Busca nome e ocupação do usuário
+                usuario = db.child("usuarios").child(dados['usuario_id']).get().val()
+                dados['nome'] = usuario.get('nome', 'Desconhecido')
+                dados['ocupacao'] = usuario.get('ocupacao', 'Usuário')
+
+                demandas.append(dados)
+        return demandas
+    except Exception as e:
+        print("Erro ao buscar demandas:", e)
+        return []
+    
+def get_demandas_do_usuario(user_id):
+    try:
+        demandas_raw = db.child("demandas").get()
+        demandas = []
+
+        if demandas_raw.each():
+            for item in demandas_raw.each():
+                dados = item.val()
+                if dados.get('usuario_id') == user_id:
+                    dados['id'] = item.key()
+
+                    # Formatar data
+                    data = datetime.fromisoformat(dados.get('data_criacao', datetime.now().isoformat()))
+                    dados['data_formatada'] = data.strftime('%d/%m/%y')
+
+                    demandas.append(dados)
+
+        return demandas
+    except Exception as e:
+        print("Erro ao buscar demandas do usuário:", e)
+        return []
+
+def logout():
+    from flask import session
+    session.pop('user', None)
   
 def recoverPassword(email):
   auth.send_password_reset_email(email)

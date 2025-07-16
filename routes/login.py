@@ -23,7 +23,7 @@ def login():
         if resultado['success']:
             session['user'] = resultado['user']
             flash(resultado['message'], 'success')
-            return redirect(url_for('recuperar.recuperar'))
+            return redirect(url_for('home.home'))
         else:
             flash(resultado['message'], 'error')
     
