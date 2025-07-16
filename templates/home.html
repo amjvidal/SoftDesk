@@ -70,28 +70,28 @@
 
                 <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:grid-cols-3">
                     
-                    {% for i in range(6) %}
+                    {% for demanda in demandas %}
                     <div class="flex flex-col justify-between p-6 transition-all duration-300 bg-white shadow-md rounded-xl hover:shadow-xl hover:-translate-y-1">
                         <div>
                             <div class="flex items-start justify-between mb-4">
                                 <div class="flex items-center">
                                     <div class="flex items-center justify-center w-12 h-12 mr-4 text-xl font-bold text-white bg-purple-600 rounded-full">
-                                        W
+                                        {{ demanda.nome[0] }}
                                     </div>
                                     <div>
-                                        <p class="font-bold text-gray-800">Nome Sobrenome</p>
-                                        <p class="text-sm text-gray-500">Ocupação</p>
+                                        <p class="font-bold text-gray-800">{{ demanda.nome }}</p>
+                                        <p class="text-sm text-gray-500">{{ demanda.ocupacao }}</p>
                                     </div>
                                 </div>
                                 <button class="text-gray-400 hover:text-gray-700"><i class="fas fa-ellipsis-v"></i></button>
                             </div>
                             <div class="flex items-center mb-4 text-sm text-gray-500">
-                               <i class="mr-2 far fa-calendar-alt"></i>
-                               <span>04/07/25</span>
+                            <i class="mr-2 far fa-calendar-alt"></i>
+                            <span>{{ demanda.data_formatada }}</span>
                             </div>
-                            <h3 class="mb-2 text-lg font-semibold text-gray-900">Nome do Sistema</h3>
+                            <h3 class="mb-2 text-lg font-semibold text-gray-900">{{ demanda.titulo }}</h3>
                             <p class="mb-6 text-sm leading-relaxed text-gray-600">
-                                Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.
+                                {{ demanda.descricao }}
                             </p>
                         </div>
                         <div class="flex items-center justify-between pt-4 border-t border-gray-200">
