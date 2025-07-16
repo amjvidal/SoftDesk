@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from firebase import criar_demanda
+from firebase import criar_demanda, logout
 
 home_nova_demanda_routes = Blueprint('homeNovaDemanda', __name__)
 
@@ -15,11 +15,15 @@ def homeCriarDemanda():
         if not user_id:
             flash("Usuário não autenticado.", "error")
             return redirect(url_for('login.login'))
+        
+        if request.method == 'POST' and request.form.get('acao') == 'logout':
+            logout()  # limpa a sessão
+            return redirect(url_for('login.login'))
 
         try:
             criar_demanda(user_id, titulo, categoria, descricao)
             flash("Demanda criada com sucesso!", "success")
-            return redirect(url_for('homeNovaDemanda.homeCriarDemanda'))
+            return redirect(url_for('home.home'))
         except Exception as e:
             flash(str(e), "error")
 

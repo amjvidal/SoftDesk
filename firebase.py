@@ -131,11 +131,17 @@ def salvarFotoPerfilLocal(user_id, foto_file):
 
 def criar_demanda(user_id, titulo, categoria, descricao):
     try:
+        # Buscar o nome do usuário no banco de dados
+        usuario_info = db.child("usuarios").child(user_id).get().val()
+        nome_usuario = usuario_info.get("nome", "Usuário não encontrado")
+
+        # Monta a demanda com o nome do usuário
         demanda = {
             "titulo": titulo,
             "categoria": categoria,
             "descricao": descricao,
             "usuario_id": user_id,
+            "usuario_nome": nome_usuario,
             "data_criacao": datetime.now().isoformat()
         }
 
@@ -192,6 +198,9 @@ def get_demandas_do_usuario(user_id):
         print("Erro ao buscar demandas do usuário:", e)
         return []
 
+def logout():
+    from flask import session
+    session.pop('user', None)
   
 def recoverPassword(email):
   auth.send_password_reset_email(email)

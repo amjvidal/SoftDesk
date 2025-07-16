@@ -52,7 +52,11 @@
                         </button>
                         <span class="absolute flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full -top-2 -right-2">2</span>
                     </div>
-                    <button class="font-semibold text-blue-600 hover:text-blue-700">Sair</button>
+                    <form method="POST">
+                        <button type="submit" name="acao" value="logout" class="font-semibold text-blue-600 hover:text-blue-700">
+                            Sair
+                        </button>
+                    </form>
                 </div>
             </header>
 
@@ -94,6 +98,15 @@
             </main>
         </div>
     </div>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <script>
+                // Transforma mensagens de flash em um array para o JavaScript
+                const messages = {{ messages | tojson }};
+                alert(messages.map(msg => msg[1]));  // msg[1] é a mensagem, msg[0] é a categoria
+            </script>
+        {% endif %}
+    {% endwith %}
 
 </body>
 </html>
