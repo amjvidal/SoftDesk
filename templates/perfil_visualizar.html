@@ -6,34 +6,57 @@
     <title>Perfil do Usuário - SoftDesk</title>
     <link rel="stylesheet" href="/static/css/main.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 min-h-screen">
-    
-    <header class="bg-white shadow-sm px-6 py-3 flex justify-between items-center sticky top-0 z-10">
-        <div class="flex items-center gap-4">
-            <img src="{{ url_for('static', filename='ifpelogo.png') }}" alt="Logo IFPE" class="h-9">
-            <span class="text-sm font-semibold text-gray-800 hidden sm:block">INSTITUTO FEDERAL PERNAMBUCO</span>
-        </div>
-        <div class="flex items-center gap-4">
-            <button class="text-gray-600 focus:outline-none focus:ring p-2 rounded-md hover:bg-gray-100">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
-            </button>
-            <a href="/logout" class="text-[#1351B4] hover:text-[#104494] font-medium text-lg">Sair</a>
-        </div>
-    </header>
+<body class="bg-gray-100">
 
-    <div class="bg-white shadow-sm px-6 py-4 flex items-center">
-        <button class="text-gray-600 focus:outline-none focus:ring p-2 rounded-md hover:bg-gray-100 mr-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        </button>
-        <span class="text-xl font-semibold text-gray-800 mr-4">Perfil</span>
-        
-        <div class="flex items-center text-gray-600 text-sm">
-            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-            <span class="mr-1">/</span>
-            <span class="font-semibold text-gray-800">Perfil</span>
-        </div>
-    </div>
+    <div class="flex min-h-screen">
+        <aside class="flex flex-col w-64 bg-white shadow-lg">
+            <div class="flex items-center justify-center h-20 border-b">
+                <div class="flex items-center">
+                    <img src={{ url_for('static', filename='ifpelogo.png') }} alt="Logo IFPE" class="h-12">
+                </div>
+            </div>
+
+            <nav class="flex-1 px-4 py-4 space-y-2">
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
+                    <i class="fas fa-home w-6 text-center"></i>
+                    <span class="ml-3">Página Inicial</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-blue-700 bg-gray-200 rounded-md font-semibold">
+                    <i class="fas fa-user w-6 text-center"></i>
+                    <span class="ml-3">Meu perfil</span>
+                </a>  
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
+                    <i class="fas fa-tasks w-6 text-center"></i>
+                    <span class="ml-3">Minhas Demandas</span>
+                </a>                   
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
+                    <i class="fas fa-plus-circle w-6 text-center"></i>
+                    <span class="ml-3">Nova Demanda</span>
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md font-semibold">
+                    <i class="fas fa-chart-bar w-6 text-center"></i>
+                    <span class="ml-3">Relatórios</span>
+                </a>
+            </nav>
+        </aside>
+
+        <div class="flex-1 flex flex-col">
+            <header class="flex items-center justify-between h-20 px-8 bg-white border-b">
+                <div>
+                    <h2 class="text-3xl font-semibold text-gray-800">Sistema de Cadastro de Demandas</h2>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="relative">
+                        <button class="text-blue-600 hover:text-blue-800 focus:outline-none">
+                            <i class="fas fa-bell fa-lg"></i>
+                        </button>
+                        <span class="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">2</span>
+                    </div>
+                    <button class="font-semibold text-blue-600 hover:text-blue-700">Sair</button>
+                </div>
+            </header>
 
     <main class="container mx-auto px-4 md:px-8 max-w-6xl mt-4">
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
