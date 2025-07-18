@@ -1,11 +1,15 @@
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 from firebase import loginfb
 
+# Cria um Blueprint para as rotas de login.
+
 login_routes = Blueprint('login',__name__)
 
-""" Rotas de login
-    - / - Get - Retorna a página de login
-    - / - Post - Verifica o login do usuário
+"""
+Rotas de Login
+
+- / (GET): Retorna a página de login.
+- / (POST): Verifica as credenciais do usuário e gerencia o processo de autenticação.
 """
 @login_routes.route('/', methods=['GET','POST'])
 def login():

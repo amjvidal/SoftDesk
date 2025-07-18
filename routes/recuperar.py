@@ -1,11 +1,15 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from firebase import recoverPassword
 
+# Cria um Blueprint para as rotas de recuperação de senha.
+
 recuperar_routes = Blueprint('recuperar',__name__)
 
-""" Rotas de home
-    - /cadastro- Get - Retorna a página de recuperar senha
-    - /cadastro- Post - Firebase faz a magica
+"""
+Rotas de Recuperação de Senha
+
+- /recuperar (GET): Retorna a página para solicitar a recuperação de senha.
+- /recuperar (POST): Processa a solicitação de recuperação de senha, enviando um e-mail.
 """
 @recuperar_routes.route('/recuperar', methods=['GET','POST'])
 def recuperar():

@@ -1,10 +1,17 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from firebase import criar_demanda, logout
 
+# Cria um Blueprint para as rotas de criação de novas demandas.
+
 home_nova_demanda_routes = Blueprint('homeNovaDemanda', __name__)
 
 @home_nova_demanda_routes.route('/homeNovaDemanda', methods=['GET', 'POST'])
 def homeCriarDemanda():
+
+    """
+    Esta função gerencia a página onde os usuários podem criar novas demandas.
+    Ela lida com a submissão do formulário de criação de demanda e o logout.
+    """
     if request.method == 'POST':
         titulo = request.form.get('titulo')
         categoria = request.form.get('categoria')

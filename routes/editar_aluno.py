@@ -1,10 +1,18 @@
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 from firebase import db, atualizarAluno, salvarFotoPerfilLocal
 
+# Cria um Blueprint para as rotas de edição de perfil de aluno.
+
 editarAluno_routes = Blueprint('editarAluno', __name__)
 
 @editarAluno_routes.route('/editarAluno', methods=['GET', 'POST'])
 def editarAluno():
+
+    """
+    Esta função gerencia a página de edição de perfil para usuários do tipo 'aluno'.
+    Ela permite que o aluno visualize seus dados atuais e os atualize, incluindo a foto de perfil.
+    Obtém o ID do usuário da sessão. Se não houver, redireciona para o login.
+    """
     user_id = session.get('user', {}).get('localId')
 
     if not user_id:

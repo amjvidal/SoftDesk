@@ -1,12 +1,18 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from firebase import cadastroAluno
 
+# Cria um Blueprint para as rotas de registro de aluno.
+
 registroAluno_routes = Blueprint('registroAluno',__name__)
 
-""" Rotas de registro aluno
-    - /cadastro- Get - Retorna a página de registro de aluno
-    - /cadastro- Post - Registra o aluno
 """
+Rotas de Registro de Aluno
+
+- /registroAluno (GET): Retorna a página do formulário de registro para alunos.
+- /registroAluno (POST): Processa os dados enviados pelo formulário para registrar um novo aluno.
+"""
+
+
 @registroAluno_routes.route('/registroAluno', methods=['GET','POST'])
 def registroAluno():
     """ Retorna a página de registro de Alunos """
